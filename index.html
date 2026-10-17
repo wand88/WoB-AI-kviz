@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="sr-Latn-ME">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI u poslovanju · Kviz</title>
+<meta name="description" content="Ankete, vježba i kviz radionice AI u poslovanju, Women on Boards Montenegro, 20. 10. 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Space+Grotesk:wght@500..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B1F4B; --mag:#B81D5C; --mag-d:#9E1850; --mag-dd:#86133F; --pink:#FFD3E3;
+  --ink:#FFF5F9; --muted:#FFD3E3; --lav:#B9A6E0;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--mag);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;font-size:18px;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:0 0 10px}
+h1,h2{font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;line-height:1.08;margin:0;color:var(--ink)}
+h1{font-size:clamp(34px,7vw,56px)}
+h2{font-size:clamp(28px,6vw,44px)}
+p{margin:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}
+.brand{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 28px}
+.nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px;background:var(--mag-d)}
+.nav a[aria-current="page"]{background:var(--ink);color:var(--mag)}
+.card{background:var(--mag-d);border-radius:16px;padding:18px 20px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.grid2{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
+section[data-sec]{display:none}
+section[data-sec].on{display:block}
+.head{margin-bottom:22px}
+/* opcije */
+.opt{position:relative;display:flex;align-items:center;gap:14px;background:var(--mag-d);border-radius:16px;padding:18px 20px;cursor:pointer;border:2px solid transparent;transition:background .15s,border-color .15s;font-size:20px}
+.opt:hover{background:var(--mag-dd)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt b{font-family:'Space Grotesk',Arial,sans-serif;font-size:22px;min-width:22px}
+.opt:has(input:checked){border-color:var(--ink);background:var(--mag-dd)}
+.opt:has(input:focus-visible){outline:3px solid var(--pink);outline-offset:2px}
+.q{background:var(--mag-d);border-radius:16px;padding:20px}
+.q .qt{font-weight:700;font-size:20px;margin-bottom:12px}
+.q .opt{background:var(--mag-dd);font-size:18px;padding:14px 16px}
+.q .opt:hover{background:#741037}
+.q .opt:has(input:checked){background:#741037}
+label.field{display:block;font-weight:700;font-size:16px;margin-bottom:6px}
+input[type=text],textarea{width:100%;font:inherit;font-size:18px;color:var(--navy);background:var(--ink);border:0;border-radius:12px;padding:14px 16px}
+textarea{min-height:140px;resize:vertical}
+input[type=text]:focus,textarea:focus{outline:3px solid var(--pink);outline-offset:2px}
+.hint{font-size:15px;color:var(--muted);margin-top:8px}
+.btn{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:18px;background:var(--ink);color:var(--mag);padding:15px 28px;border-radius:999px;margin-top:20px}
+.btn:hover{background:#fff}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.done{display:none;margin-top:18px}
+.done.on{display:block}
+.ok{display:flex;gap:14px;align-items:flex-start;background:var(--navy);border-radius:16px;padding:20px}
+.ok .ico{flex:none;width:34px;height:34px;border-radius:50%;background:var(--pink);color:var(--navy);display:grid;place-items:center;font-weight:800}
+.res{margin-top:12px;border-radius:12px;padding:14px 16px;background:var(--navy)}
+.res .v{font-weight:700}
+.res.good .v{color:#9FE3C2}
+.res.bad .v{color:var(--pink)}
+.score{font-family:'Space Grotesk',Arial,sans-serif;font-size:48px;font-weight:700;line-height:1}
+.landing a.tile{display:block;text-decoration:none;color:var(--ink);background:var(--mag-d);border-radius:16px;padding:20px}
+.landing a.tile:hover{background:var(--mag-dd)}
+.landing .tile span{display:block;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
+.landing .tile strong{font-family:'Space Grotesk',Arial,sans-serif;font-size:24px}
+.foot{margin-top:40px;font-size:14px;color:var(--muted)}
+.demo{background:var(--navy);color:var(--pink);font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
+.err{color:var(--navy);background:var(--pink);border-radius:12px;padding:12px 14px;margin-top:12px;display:none}
+.err.on{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="brand">AI u poslovanju · WoB Montenegro</span>
+    <span id="demoBadge" class="demo" hidden>DEMO režim</span>
+  </div>
+
+  <nav class="nav" aria-label="Sekcije">
+    <a href="#anketa">Anketa</a>
+    <a href="#alati">Alati</a>
+    <a href="#vjezba">Vježba 1</a>
+    <a href="#kviz">Kviz</a>
+  </nav>
+
+  <div class="card" style="margin-bottom:28px">
+    <label class="field" for="ime">Vaše ime (opciono)</label>
+    <input type="text" id="ime" maxlength="60" autocomplete="given-name" placeholder="Možete ostati anonimni">
+    <p class="hint">Ime vidi samo predavač. Ne unosite podatke o svojoj firmi ni klijentima.</p>
+  </div>
+
+  <!-- POČETNA -->
+  <section data-sec="start" class="landing">
+    <div class="head">
+      <p class="eyebrow">Radionica · 20. 10. 2026.</p>
+      <h1>Odgovarajte sa telefona</h1>
+    </div>
+    <div class="grid2">
+      <a class="tile" href="#anketa"><span>Anketa · 1 klik</span><strong>Za šta ste AI koristile juče?</strong></a>
+      <a class="tile" href="#alati"><span>Pitanje za chat</span><strong>Koji alat koristite za šta?</strong></a>
+      <a class="tile" href="#vjezba"><span>Vježba 1 · 8 minuta</span><strong>Popravite loš prompt</strong></a>
+      <a class="tile" href="#kviz"><span>Kviz · 3 pitanja</span><strong>Šta biste uradile?</strong></a>
+    </div>
+  </section>
+
+  <!-- ANKETA -->
+  <section data-sec="anketa">
+    <div class="head">
+      <p class="eyebrow">Anketa · 1 klik</p>
+      <h2>Za šta ste AI koristile juče?</h2>
+    </div>
+    <form id="f-anketa" class="grid2">
+      <label class="opt"><input type="radio" name="a" value="A" required><b>A</b> Mejl ili poruku</label>
+      <label class="opt"><input type="radio" name="a" value="B"><b>B</b> Sažetak dokumenta</label>
+      <label class="opt"><input type="radio" name="a" value="C"><b>C</b> Istraživanje teme</label>
+      <label class="opt"><input type="radio" name="a" value="D"><b>D</b> Analizu podataka</label>
+      <label class="opt"><input type="radio" name="a" value="E"><b>E</b> Nešto drugo</label>
+      <label class="opt"><input type="radio" name="a" value="F"><b>F</b> Juče nisam</label>
+      <div><button class="btn" type="submit">Pošalji odgovor</button></div>
+    </form>
+    <div class="done" id="d-anketa"><div class="ok"><span class="ico" aria-hidden="true">✓</span><div><p><b>Hvala, glas je zabilježen.</b></p><p class="hint">Rezultate pratite na ekranu predavača. Možete promijeniti odgovor; računa se posljednji.</p></div></div></div>
+    <p class="err" id="e-anketa"></p>
+  </section>
+
+  <!-- ALATI -->
+  <section data-sec="alati">
+    <div class="head">
+      <p class="eyebrow">Pitanje za chat</p>
+      <h2>Koji alat koristite za šta?</h2>
+    </div>
+    <form id="f-alati">
+      <div class="card">
+        <label class="field" for="alati-t">Jedan red</label>
+        <input type="text" id="alati-t" maxlength="300" required placeholder="ChatGPT → mejlovi · Copilot → zapisnici">
+        <p class="hint">Primjer: ChatGPT → mejlovi i sažeci · Copilot → zapisnici · Perplexity → istraživanje</p>
+      </div>
+      <button class="btn" type="submit">Pošalji</button>
+    </form>
+    <div class="done" id="d-alati"><div class="ok"><span class="ico" aria-hidden="true">✓</span><div><p><b>Hvala! Odgovor je na ekranu.</b></p><p class="hint">Ako koristite samo jedan alat, zapišite jedan novi koji ćete probati ove nedjelje.</p></div></div></div>
+    <p class="err" id="e-alati"></p>
+  </section>
+
+  <!-- VJEŽBA -->
+  <section data-sec="vjezba">
+    <div class="head">
+      <p class="eyebrow">Vježba 1 · 8 minuta</p>
+      <h2>Popravite loš prompt</h2>
+    </div>
+    <div class="card" style="margin-bottom:16px"><p style="font-size:20px">„Napravi analizu tržišta kartičnog plaćanja u Crnoj Gori.“</p></div>
+    <div class="grid2" style="margin-bottom:20px">
+      <p><b>1</b>&nbsp; Prepravite ga po RACER-u</p>
+      <p><b>2</b>&nbsp; Dodajte dodatak za pouzdanost</p>
+      <p><b>3</b>&nbsp; Pokrenite oba prompta u svom alatu</p>
+      <p><b>4</b>&nbsp; Uporedite: brojevi, izvori, struktura</p>
+    </div>
+    <form id="f-vjezba" class="stack">
+      <div class="card">
+        <label class="field" for="vj-prompt">Vaš novi prompt</label>
+        <textarea id="vj-prompt" maxlength="2000" required placeholder="Ti si … Napravi … Za … Format: … Na kraju navedi šta nedostaje …"></textarea>
+      </div>
+      <div class="card">
+        <label class="field" for="vj-razlika">Jedna razlika koju ste primijetile kada ste unijele oba prompta u alat</label>
+        <textarea id="vj-razlika" maxlength="600" style="min-height:90px" required></textarea>
+      </div>
+      <div><button class="btn" type="submit">Pošalji vježbu</button></div>
+    </form>
+    <div class="done" id="d-vjezba"><div class="ok"><span class="ico" aria-hidden="true">✓</span><div><p><b>Poslato. Odlično!</b></p><p class="hint">Neke od prompta komentarišemo uživo.</p></div></div></div>
+    <p class="err" id="e-vjezba"></p>
+    <p class="hint" style="margin-top:16px">Ne unosite podatke svoje firme; vježba radi i bez njih.</p>
+  </section>
+
+  <!-- KVIZ -->
+  <section data-sec="kviz">
+    <div class="head">
+      <p class="eyebrow">Kviz · 3 pitanja</p>
+      <h2>Šta biste uradile?</h2>
+    </div>
+    <form id="f-kviz" class="stack">
+      <div class="q" role="group" aria-labelledby="qt1">
+        <p class="qt" id="qt1">1&nbsp; Treba vam segmentacija klijenata. Ubacite listu sa imenima u lični nalog?</p>
+        <div class="stack">
+          <label class="opt"><input type="radio" name="q1" value="A" required><b>A</b> Da, pa obrišem razgovor</label>
+          <label class="opt"><input type="radio" name="q1" value="B"><b>B</b> Ne: anonimizujem ili koristim odobren alat</label>
+        </div>
+        <div class="res" id="r-q1" hidden></div>
+      </div>
+      <div class="q" role="group" aria-labelledby="qt2">
+        <p class="qt" id="qt2">2&nbsp; AI je dao izvještaj sa tri izvora. Šta sada?</p>
+        <div class="stack">
+          <label class="opt"><input type="radio" name="q2" value="A" required><b>A</b> Šaljem, izvori su navedeni</label>
+          <label class="opt"><input type="radio" name="q2" value="B"><b>B</b> Otvaram svaki izvor i provjeravam brojeve</label>
+        </div>
+        <div class="res" id="r-q2" hidden></div>
+      </div>
+      <div class="q" role="group" aria-labelledby="qt3">
+        <p class="qt" id="qt3">3&nbsp; Direktor vas na video pozivu hitno i „povjerljivo“ traži uplatu.</p>
+        <div class="stack">
+          <label class="opt"><input type="radio" name="q3" value="A" required><b>A</b> Uplaćujem, vidim ga</label>
+          <label class="opt"><input type="radio" name="q3" value="B"><b>B</b> Prekidam i zovem ga na poznat broj</label>
+        </div>
+        <div class="res" id="r-q3" hidden></div>
+      </div>
+      <div><button class="btn" type="submit">Provjeri i pošalji</button></div>
+    </form>
+    <div class="done" id="d-kviz"><div class="ok"><span class="score" id="kviz-score">3/3</span><div><p><b id="kviz-msg">Odlično!</b></p><p class="hint">Objašnjenja su ispod svakog pitanja.</p></div></div></div>
+    <p class="err" id="e-kviz"></p>
+  </section>
+
+  <p class="foot">Lazar Jovanović · Represent System · Odgovori služe samo za ovu radionicu.</p>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var CFG = window.KVIZ_CONFIG || {};
+  var URL_ = (CFG.SCRIPT_URL || '').trim();
+  var DEMO = !URL_;
+  if (DEMO) document.getElementById('demoBadge').hidden = false;
+
+  function ls(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } }
+  var dev = ls('wob_dev');
+  if(!dev){ dev = Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4); ls('wob_dev', dev); }
+  var imeEl = document.getElementById('ime');
+  imeEl.value = ls('wob_ime') || '';
+  imeEl.addEventListener('input', function(){ ls('wob_ime', imeEl.value.trim()); });
+
+  // navigacija po #hash (svaki QR kod vodi na svoju sekciju)
+  var secs = ['anketa','alati','vjezba','kviz'];
+  function route(){
+    var h = (location.hash || '').replace('#','');
+    var cur = secs.indexOf(h) > -1 ? h : 'start';
+    document.querySelectorAll('section[data-sec]').forEach(function(s){ s.classList.toggle('on', s.getAttribute('data-sec') === cur); });
+    document.querySelectorAll('.nav a').forEach(function(a){ if(a.getAttribute('href') === '#'+cur) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', route); route();
+
+  function send(sekcija, odgovori, bodovi){
+    var payload = { sekcija: sekcija, uredjaj: dev, ime: imeEl.value.trim(), odgovori: odgovori, bodovi: bodovi };
+    if (DEMO){
+      var rows = []; try{ rows = JSON.parse(ls('wob_demo_rows') || '[]'); }catch(e){}
+      rows.push({ t: new Date().toISOString(), s: sekcija, d: dev, i: payload.ime, a: [odgovori[0]||'', odgovori[1]||'', odgovori[2]||''], b: (typeof bodovi === 'number' ? bodovi : null) });
+      ls('wob_demo_rows', JSON.stringify(rows));
+      return Promise.resolve();
+    }
+    // text/plain izbjegava CORS preflight; Apps Script čita e.postData.contents
+    return fetch(URL_, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
+  }
+
+  function wire(id, collect, after){
+    var f = document.getElementById('f-'+id), d = document.getElementById('d-'+id), e = document.getElementById('e-'+id);
+    var btn = f.querySelector('button[type=submit]');
+    f.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var c = collect(); if(!c) return;
+      btn.disabled = true; e.classList.remove('on');
+      send(id, c.odgovori, c.bodovi).then(function(){
+        d.classList.add('on'); btn.disabled = false; btn.textContent = 'Pošalji ponovo';
+        if(after) after(c);
+      }).catch(function(){
+        btn.disabled = false; e.textContent = 'Slanje nije uspjelo. Provjerite internet vezu i pokušajte ponovo.'; e.classList.add('on');
+      });
+    });
+  }
+
+  function val(form, name){ var x = form.querySelector('input[name="'+name+'"]:checked'); return x ? x.value : ''; }
+
+  wire('anketa', function(){ var v = val(document.getElementById('f-anketa'),'a'); return v ? {odgovori:[v]} : null; });
+  wire('alati', function(){ var v = document.getElementById('alati-t').value.trim(); return v ? {odgovori:[v]} : null; });
+  wire('vjezba', function(){
+    var p = document.getElementById('vj-prompt').value.trim(), r = document.getElementById('vj-razlika').value.trim();
+    return (p && r) ? {odgovori:[p, r]} : null;
+  });
+
+  var KEY = { q1:'B', q2:'B', q3:'B' };
+  var OBJ = {
+    q1:'Brisanje razgovora ne poništava to što su podaci već poslati na servere dobavljača. Prvo anonimizujte ili koristite alat koji je firma odobrila.',
+    q2:'Navedeni izvor može da ne postoji ili da ne sadrži taj broj. Svaki izvor otvorite i provjerite brojeve prije slanja.',
+    q3:'Glas i lice danas se mogu lažirati (slučaj Arup, 25 miliona USD). Hitnost plus tajnost znači: prekinite i pozovite na poznat broj.'
+  };
+  wire('kviz', function(){
+    var f = document.getElementById('f-kviz');
+    var a = ['q1','q2','q3'].map(function(q){ return val(f,q); });
+    if(a.indexOf('') > -1) return null;
+    var b = a.reduce(function(s,v,i){ return s + (v === KEY['q'+(i+1)] ? 1 : 0); }, 0);
+    return { odgovori:a, bodovi:b };
+  }, function(c){
+    c.odgovori.forEach(function(v,i){
+      var q = 'q'+(i+1), r = document.getElementById('r-'+q), good = v === KEY[q];
+      r.hidden = false; r.className = 'res ' + (good ? 'good' : 'bad');
+      r.innerHTML = '';
+      var p1 = document.createElement('p'); p1.className = 'v'; p1.textContent = good ? 'Tačno: B' : 'Tačan odgovor je B';
+      var p2 = document.createElement('p'); p2.textContent = OBJ[q];
+      r.appendChild(p1); r.appendChild(p2);
+    });
+    document.getElementById('kviz-score').textContent = c.bodovi + '/3';
+    document.getElementById('kviz-msg').textContent = c.bodovi === 3 ? 'Odlično, sve tačno!' : (c.bodovi === 2 ? 'Skoro sve tačno!' : 'Pogledajte objašnjenja ispod.');
+  });
+})();
+</script>
+</body>
+</html>

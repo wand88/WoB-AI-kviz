@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="sr-Latn-ME">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>AI u poslovanju · Rezultati uživo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Space+Grotesk:wght@500..700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B1F4B;--navy2:#262B5E;--navy3:#323873;--ink:#F6F3FA;--soft:#C9C3E3;--pink:#F5A3C4;--mag:#D6246E;--lav:#B9A6E0;--good:#9FE3C2}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--navy);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;font-size:18px;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:1500px;margin:0 auto;padding:28px 16px 48px}
+@media(min-width:900px){.wrap{padding:40px 48px 56px}}
+h1,h2,h3{font-family:'Space Grotesk',Arial,sans-serif;margin:0;line-height:1.1}
+p{margin:0}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}
+.top h1{font-size:clamp(30px,4vw,48px)}
+.status{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--soft)}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 rgba(159,227,194,.7);animation:pulse 2s infinite}
+.dot.off{background:#E5989B;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(159,227,194,.6)}70%{box-shadow:0 0 0 12px rgba(159,227,194,0)}100%{box-shadow:0 0 0 0 rgba(159,227,194,0)}}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tabs a{color:var(--ink);text-decoration:none;font-weight:600;font-size:16px;padding:9px 16px;border-radius:999px;background:var(--navy2)}
+.tabs a .n{color:var(--pink);margin-left:6px}
+.tabs a[aria-current="page"]{background:var(--mag)}
+.tabs a[aria-current="page"] .n{color:var(--ink)}
+.panel{display:none}
+.panel.on{display:grid;grid-template-columns:1fr;gap:28px}
+@media(min-width:1100px){.panel.on{grid-template-columns:1fr 300px}}
+.panel h2{font-size:clamp(28px,3.4vw,44px);margin:6px 0 22px}
+.qrbox{background:var(--navy2);border-radius:20px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:14px;align-self:start}
+.qrbox .qr{background:#fff;padding:14px;border-radius:12px;line-height:0}
+.qrbox .qr img,.qrbox .qr canvas{width:220px;height:220px}
+.qrbox p{text-align:center;color:var(--soft);font-size:15px;word-break:break-all}
+.qrbox strong{font-family:'Space Grotesk',Arial,sans-serif;font-size:22px}
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar{display:grid;grid-template-columns:minmax(150px,280px) 1fr 70px;align-items:center;gap:16px}
+.bar .lbl{font-size:20px}
+.bar .lbl b{font-family:'Space Grotesk',Arial,sans-serif;color:var(--pink);margin-right:8px}
+.track{background:var(--navy2);border-radius:8px;height:40px;overflow:hidden}
+.fill{height:100%;background:var(--mag);border-radius:8px;width:0;transition:width .6s ease}
+.fill.alt{background:var(--lav)}
+.bar .num{font-family:'Space Grotesk',Arial,sans-serif;font-size:24px;font-weight:700;text-align:right}
+.bar .num small{display:block;font-family:'DM Sans',Arial,sans-serif;font-size:13px;font-weight:400;color:var(--soft)}
+.kpis{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+.kpi{background:var(--navy2);border-radius:16px;padding:18px 22px;min-width:180px}
+.kpi .v{font-family:'Space Grotesk',Arial,sans-serif;font-size:44px;font-weight:700;line-height:1}
+.kpi .k{color:var(--soft);font-size:15px;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.chip{background:var(--navy3);border-radius:999px;padding:8px 14px;font-weight:600}
+.chip b{color:var(--pink);margin-left:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.c{background:var(--navy2);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;border-left:6px solid var(--mag)}
+.c .who{font-size:14px;color:var(--soft)}
+.c .txt{font-size:18px;white-space:pre-wrap;word-break:break-word}
+.c .lab{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.empty{color:var(--soft);font-size:18px;padding:24px;border:2px dashed var(--navy3);border-radius:16px;text-align:center}
+.tblwrap{overflow-x:auto;border-radius:16px;background:var(--navy2)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--navy3);vertical-align:top}
+th{position:sticky;top:0;background:var(--navy3);font-weight:700;color:var(--pink);white-space:nowrap}
+td.long{max-width:420px;white-space:pre-wrap;word-break:break-word}
+.demo{background:var(--mag);color:var(--ink);font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:14px;background:var(--navy3);color:var(--ink);padding:8px 14px;border-radius:999px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <p class="eyebrow">AI u poslovanju · Women on Boards Montenegro</p>
+      <h1>Rezultati uživo</h1>
+    </div>
+    <div>
+      <div class="status"><span class="dot" id="dot"></span><span id="st">Povezivanje…</span> <span id="demoBadge" class="demo" hidden>DEMO</span></div>
+    </div>
+  </div>
+
+  <nav class="tabs" aria-label="Rezultati">
+    <a href="#anketa">Anketa<span class="n" id="n-anketa">0</span></a>
+    <a href="#alati">Alati<span class="n" id="n-alati">0</span></a>
+    <a href="#vjezba">Vježba<span class="n" id="n-vjezba">0</span></a>
+    <a href="#kviz">Kviz<span class="n" id="n-kviz">0</span></a>
+    <a href="#tabela">Tabela<span class="n" id="n-tabela">0</span></a>
+  </nav>
+
+  <section class="panel" data-p="anketa">
+    <div>
+      <p class="eyebrow">Anketa · 1 klik</p>
+      <h2>Za šta ste AI koristile juče?</h2>
+      <div class="bars" id="bars-anketa"></div>
+    </div>
+    <aside class="qrbox" data-qr="anketa"></aside>
+  </section>
+
+  <section class="panel" data-p="alati">
+    <div>
+      <p class="eyebrow">Pitanje za chat</p>
+      <h2>Koji alat koristite za šta?</h2>
+      <div class="chips" id="chips-alati"></div>
+      <div class="cards" id="cards-alati"></div>
+    </div>
+    <aside class="qrbox" data-qr="alati"></aside>
+  </section>
+
+  <section class="panel" data-p="vjezba">
+    <div>
+      <p class="eyebrow">Vježba 1 · popravite loš prompt</p>
+      <h2>Vaši novi promptovi</h2>
+      <div class="cards" id="cards-vjezba"></div>
+    </div>
+    <aside class="qrbox" data-qr="vjezba"></aside>
+  </section>
+
+  <section class="panel" data-p="kviz">
+    <div>
+      <p class="eyebrow">Kviz · 3 pitanja</p>
+      <h2>Šta biste uradile?</h2>
+      <div class="kpis" id="kpi-kviz"></div>
+      <p class="eyebrow" style="margin-bottom:12px">Tačan odgovor (B) po pitanju</p>
+      <div class="bars" id="bars-kviz"></div>
+      <h3 style="font-size:24px;margin:32px 0 14px">Rezultati po polaznici</h3>
+      <div class="cards" id="cards-kviz"></div>
+    </div>
+    <aside class="qrbox" data-qr="kviz"></aside>
+  </section>
+
+  <section class="panel" data-p="tabela">
+    <div style="grid-column:1/-1">
+      <p class="eyebrow">Svi odgovori, najnoviji prvi</p>
+      <h2>Live tabela</h2>
+      <div class="tblwrap"><table><thead><tr><th>Vrijeme</th><th>Sekcija</th><th>Ime</th><th>Odgovor 1</th><th>Odgovor 2</th><th>Odgovor 3</th><th>Bodovi</th></tr></thead><tbody id="tbody"></tbody></table></div>
+      <div class="tools"><button class="btn" id="csv">Preuzmi CSV</button><button class="btn" id="clearDemo" hidden>Obriši demo odgovore</button></div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+  var CFG = window.KVIZ_CONFIG || {}, URL_ = (CFG.SCRIPT_URL || '').trim(), DEMO = !URL_;
+  var EVERY = Math.max(2, Number(CFG.REFRESH_SECONDS) || 4) * 1000;
+  if (DEMO){ document.getElementById('demoBadge').hidden = false; document.getElementById('clearDemo').hidden = false; }
+  var NAMES = { anketa:'Anketa', alati:'Alati', vjezba:'Vježba 1', kviz:'Kviz' };
+  var ANK = [['A','Mejl ili poruku'],['B','Sažetak dokumenta'],['C','Istraživanje teme'],['D','Analizu podataka'],['E','Nešto drugo'],['F','Juče nisam']];
+  var KVQ = ['1 · Lista klijenata','2 · Tri izvora','3 · Hitna uplata'];
+  var TOOLS = [['ChatGPT',/chat\s*gpt|chatgpt|gpt/i],['Copilot',/copilot/i],['Gemini',/gemini/i],['NotebookLM',/notebook/i],['Claude',/claude/i],['Perplexity',/perplexity/i],['Fireflies',/fireflies/i],['Canva',/canva/i]];
+
+  function el(tag, cls, txt){ var e = document.createElement(tag); if(cls) e.className = cls; if(txt != null) e.textContent = txt; return e; }
+  function clear(n){ while(n.firstChild) n.removeChild(n.firstChild); }
+  function who(r){ return (r.i && String(r.i).trim()) ? String(r.i).trim() : 'Anonimno'; }
+  function hhmm(t){ var d = new Date(t); return isNaN(d) ? '' : d.toLocaleTimeString('sr-Latn-ME',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }
+  // posljednji odgovor po uređaju (ako neko pošalje ponovo, računa se posljednji)
+  function latest(rows, s){ var m = {}, order = []; rows.forEach(function(r){ if(r.s !== s) return; var k = r.d || Math.random(); if(!(k in m)) order.push(k); m[k] = r; }); return order.map(function(k){ return m[k]; }); }
+
+  // QR kodovi za svaku sekciju, iz stvarne adrese stranice
+  document.querySelectorAll('[data-qr]').forEach(function(box){
+    var s = box.getAttribute('data-qr'), link = new URL('index.html#' + s, location.href).href;
+    box.appendChild(el('strong', null, 'Skenirajte'));
+    var q = el('div','qr'); box.appendChild(q);
+    try { new QRCode(q, { text: link, width: 440, height: 440, colorDark: '#1B1F4B', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); } catch(e){ q.textContent = ''; }
+    box.appendChild(el('p', null, link.replace(/^https?:\/\//,'')));
+  });
+
+  function route(){
+    var h = (location.hash || '#anketa').slice(1); if(!document.querySelector('[data-p="'+h+'"]')) h = 'anketa';
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-p') === h); });
+    document.querySelectorAll('.tabs a').forEach(function(a){ if(a.getAttribute('href') === '#'+h) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('hashchange', route); route();
+
+  function bar(host, label, letter, n, total, alt){
+    var row = el('div','bar'), l = el('div','lbl');
+    if(letter){ l.appendChild(el('b', null, letter)); }
+    l.appendChild(document.createTextNode(label));
+    var tr = el('div','track'), f = el('div','fill' + (alt ? ' alt' : '')); tr.appendChild(f);
+    var pct = total ? Math.round(n * 100 / total) : 0;
+    var num = el('div','num', String(n)); num.appendChild(el('small', null, pct + '%'));
+    row.appendChild(l); row.appendChild(tr); row.appendChild(num); host.appendChild(row);
+    requestAnimationFrame(function(){ f.style.width = pct + '%'; });
+  }
+  function emptyMsg(host, msg){ host.appendChild(el('p','empty', msg)); }
+
+  var lastRows = [];
+  function render(rows){
+    lastRows = rows;
+    // ANKETA
+    var an = latest(rows,'anketa'), bA = document.getElementById('bars-anketa'); clear(bA);
+    ANK.forEach(function(o){ bar(bA, o[1], o[0], an.filter(function(r){ return r.a[0] === o[0]; }).length, an.length); });
+    bA.appendChild(el('p','status', 'Glasalo: ' + an.length));
+    // ALATI
+    var al = latest(rows,'alati').reverse(), cA = document.getElementById('cards-alati'), ch = document.getElementById('chips-alati'); clear(cA); clear(ch);
+    TOOLS.forEach(function(t){ var n = al.filter(function(r){ return t[1].test(r.a[0]); }).length; if(n){ var c = el('span','chip', t[0]); c.appendChild(el('b', null, String(n))); ch.appendChild(c); } });
+    if(!al.length) emptyMsg(cA, 'Čekamo prve odgovore…');
+    al.forEach(function(r){ var c = el('div','c'); c.appendChild(el('p','txt', r.a[0])); c.appendChild(el('p','who', who(r))); cA.appendChild(c); });
+    // VJEŽBA
+    var vj = latest(rows,'vjezba').reverse(), cV = document.getElementById('cards-vjezba'); clear(cV);
+    if(!vj.length) emptyMsg(cV, 'Čekamo prve promptove…');
+    vj.forEach(function(r){ var c = el('div','c'); c.appendChild(el('p','lab','Prompt')); c.appendChild(el('p','txt', r.a[0])); c.appendChild(el('p','lab','Razlika')); c.appendChild(el('p','txt', r.a[1])); c.appendChild(el('p','who', who(r) + ' · ' + hhmm(r.t))); cV.appendChild(c); });
+    // KVIZ
+    var kv = latest(rows,'kviz'), k = document.getElementById('kpi-kviz'), bK = document.getElementById('bars-kviz'), cK = document.getElementById('cards-kviz'); clear(k); clear(bK); clear(cK);
+    var avg = kv.length ? (kv.reduce(function(s,r){ return s + (Number(r.b) || 0); },0) / kv.length) : 0;
+    var all3 = kv.filter(function(r){ return Number(r.b) === 3; }).length;
+    [[String(kv.length),'odgovorilo'],[avg.toFixed(1).replace('.',',') + '/3','prosjek'],[String(all3),'sve tačno']].forEach(function(x){ var d = el('div','kpi'); d.appendChild(el('div','v',x[0])); d.appendChild(el('div','k',x[1])); k.appendChild(d); });
+    KVQ.forEach(function(lbl,i){ bar(bK, lbl, null, kv.filter(function(r){ return r.a[i] === 'B'; }).length, kv.length); });
+    if(!kv.length) emptyMsg(cK, 'Čekamo prve odgovore…');
+    kv.slice().sort(function(a,b){ return (Number(b.b)||0) - (Number(a.b)||0); }).forEach(function(r){ var c = el('div','c'); c.appendChild(el('p','txt', who(r) + ': ' + (r.b == null ? '?' : r.b) + '/3')); c.appendChild(el('p','who', 'Odgovori: ' + r.a.join(' · '))); cK.appendChild(c); });
+    // TABELA
+    var tb = document.getElementById('tbody'); clear(tb);
+    rows.slice().reverse().forEach(function(r){ var tr = el('tr'); [hhmm(r.t), NAMES[r.s] || r.s, who(r), r.a[0], r.a[1], r.a[2], r.b == null ? '' : String(r.b)].forEach(function(v,i){ tr.appendChild(el('td', i >= 3 && i <= 5 ? 'long' : null, v)); }); tb.appendChild(tr); });
+    // brojači
+    ['anketa','alati','vjezba','kviz'].forEach(function(s){ document.getElementById('n-'+s).textContent = latest(rows,s).length; });
+    document.getElementById('n-tabela').textContent = rows.length;
+  }
+
+  function norm(r){ return { t:r.t, s:r.s, d:r.d, i:r.i, a:(r.a || ['','','']).map(function(x){ return x == null ? '' : String(x); }), b:(r.b === '' || r.b == null) ? null : Number(r.b) }; }
+  function setStatus(ok, msg){ document.getElementById('dot').className = 'dot' + (ok ? '' : ' off'); document.getElementById('st').textContent = msg; }
+
+  function load(){
+    if(DEMO){
+      var rows = []; try{ rows = JSON.parse(localStorage.getItem('wob_demo_rows') || '[]'); }catch(e){}
+      render(rows.map(norm)); setStatus(true, 'Demo · osvježeno ' + hhmm(new Date())); return Promise.resolve();
+    }
+    return fetch(URL_ + (URL_.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
+      .then(function(r){ return r.json(); })
+      .then(function(j){ render((j.rows || []).map(norm)); setStatus(true, 'Uživo · osvježeno ' + hhmm(new Date())); })
+      .catch(function(){ setStatus(false, 'Nema veze sa tabelom · pokušavam ponovo'); });
+  }
+  (function loop(){ load().then(function(){ setTimeout(loop, EVERY); }); })();
+  window.addEventListener('storage', function(e){ if(e.key === 'wob_demo_rows') load(); });
+
+  document.getElementById('csv').addEventListener('click', function(){
+    var q = function(v){ v = String(v == null ? '' : v); return '"' + v.replace(/"/g,'""') + '"'; };
+    var lines = [['Vrijeme','Sekcija','Ime','Odgovor 1','Odgovor 2','Odgovor 3','Bodovi'].map(q).join(',')];
+    lastRows.forEach(function(r){ lines.push([r.t, r.s, who(r), r.a[0], r.a[1], r.a[2], r.b == null ? '' : r.b].map(q).join(',')); });
+    var blob = new Blob(['﻿' + lines.join('\n')], {type:'text/csv;charset=utf-8'});
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'wob-kviz-odgovori.csv'; document.body.appendChild(a); a.click(); a.remove();
+  });
+  document.getElementById('clearDemo').addEventListener('click', function(){ try{ localStorage.removeItem('wob_demo_rows'); }catch(e){} load(); });
+})();
+</script>
+</body>
+</html>
