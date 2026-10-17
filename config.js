@@ -5,7 +5,7 @@
 // ovom pregledaču) – korisno za probu prije treninga.
 // =====================================================================
 window.KVIZ_CONFIG = {
-  SCRIPT_URL: "",
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwOBeL5oORJDpGOeLDg4qZT6ntT_ek5bvBLia6u6oRphxH74-8o1o5Khmlzxe0OBZFAhg/exec",
   // Koliko često se osvježava stranica sa rezultatima (u sekundama)
   REFRESH_SECONDS: 4
 };
